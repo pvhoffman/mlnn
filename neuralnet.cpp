@@ -223,5 +223,48 @@ double NNetwork::train(const arma::mat& X, const arma::mat& y)
 
 }
 //---------------------------------------------------------
+arma::mat NNetwork::_get_display_data(const arma::mat X)
+{
+    const unsigned m = X.n_rows;
+    const unsigned n = X.n_cols;
+
+    const unsigned example_width  = (unsigned)(sqrt((double)n));
+    const unsigned example_height = (n / example_width);
+
+    const unsigned display_rows = (unsigned)floor(sqrt((double)m)); 
+    const unsigned display_cols = (unsigned)ceil( (double)m / (double)display_rows );
+
+    const unsigned pad = 1;
+
+    const unsigned nr = pad + display_rows * (example_height + pad);
+    const unsigned nc = pad + display_cols * (example_width  + pad);
+
+    arma::mat res = arma::zeros(nr, nc);// * 255.0;
+
+    unsigned cx = 0;
+
+    for(unsigned j = 0; j < display_rows; j++){
+        if(cx > m) break;
+        for(unsigned i = 0; i < display_cols; i++){
+                if(cx > m) break;
+                const double mv = arma::max( arma::abs( X.row(cx) ) );
+
+                const unsigned frow = pad + j * (example_height + pad);
+                const unsigned lrow = frow + example_height;
+
+                const unsigned fcol = pad + i * (example_width + pad);
+                const unsigned lcol = fcol + example_width;
+
+                res( arma::span(frow, lrow ), arma::span(fcol, lcol ) ) = ( arma::abs( X.row(cx).reshape(example_height, example.width) ) ) / mv;
+
+                cx = cx + 1;
+        }
+    }
+    return res;
+}
+void NNetwork::visualize()
+{
+}
+//---------------------------------------------------------
 } // namespace mlnn
 

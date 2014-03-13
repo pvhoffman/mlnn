@@ -357,6 +357,18 @@ void XORNetworkExample()
 
 int main (int argc, char const* argv[])
 {
+    arma::mat xx;
+
+    xx.load( "c:\\temp\\out.pgm", arma::pgm_binary);
+    std::cout << xx.n_rows << "x" << xx.n_cols << std::endl;
+
+    xx.reshape(1, xx.n_rows * xx.n_cols);
+
+    std::cout << xx.n_rows << "x" << xx.n_cols << std::endl;
+
+    //std::cout << xx << std::endl;
+
+
     ANDNetworkExample();
     ORNetworkExample();
     XORNetworkExample();

@@ -57,6 +57,9 @@ class NNetwork
         // sigmoid gradient used in back prop
         arma::mat _sigmoidGradient(const arma::mat& z);
 
+        // generates the display data matrix for X
+        arma::mat NNetwork::_get_display_data(const arma::mat X)
+
     public:
         NNetwork(const NNLayerDesc_t* layerDesc, const unsigned& layerCount);
         virtual ~NNetwork();
@@ -66,6 +69,8 @@ class NNetwork
         double train(const arma::mat& X, const arma::mat& y);
 
         unsigned predict(const arma::mat& X);
+
+        void visualize();
 };
 //---------------------------------------------------------
 class NNException : public std::runtime_error
