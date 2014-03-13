@@ -6,9 +6,13 @@ OBJFILES = $(MAIN_SRC_PATH)\$(MAIN_SRC_FILE).obj $(MAIN_SRC_PATH)\stdafx.obj $(M
 DEBUG = /Od /Oy- /D _DEBUG
 # ---------------------------------------------------------
 USER_DEFINES = /D WIN32
-USER_INCLUDE = -I "J:\armadillo-4.000.3\include" 
-SYSTEM_INCLUDE = -I "C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Include"
-SYSTEM_LIB_PATH = "C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Lib" 
+# USER_INCLUDE = -I "J:\armadillo-4.000.3\include" 
+USER_INCLUDE = -I "C:\Users\Paul\source\armadillo-4.100.2\include"
+SYSTEM_INCLUDE = 
+# -I $(WindowsSDK_IncludePath) 
+# "C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1A\Include" # SYSTEM_INCLUDE = -I "C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Include"
+SYSTEM_LIB_PATH = "C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1A\Lib" 
+# SYSTEM_LIB_PATH = "C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Lib" 
 LIBS_PATH = 
 
 CC = cl.exe

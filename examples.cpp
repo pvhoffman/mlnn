@@ -61,6 +61,8 @@ void ADDERNetworkExample()
         J = AdderNetwork.train(X,y);
         if( !(i % 100) ){
             std::cout << "Current cost for ADDER network at training iteration " << i << " is " << J << std::endl;
+
+            AdderNetwork.visualize();
         }
     }
 
@@ -357,21 +359,12 @@ void XORNetworkExample()
 
 int main (int argc, char const* argv[])
 {
-    arma::mat xx;
 
-    xx.load( "c:\\temp\\out.pgm", arma::pgm_binary);
-    std::cout << xx.n_rows << "x" << xx.n_cols << std::endl;
-
-    xx.reshape(1, xx.n_rows * xx.n_cols);
-
-    std::cout << xx.n_rows << "x" << xx.n_cols << std::endl;
-
-    //std::cout << xx << std::endl;
-
-
+/*
     ANDNetworkExample();
     ORNetworkExample();
     XORNetworkExample();
+*/
     ADDERNetworkExample();
     return 0;
 }

@@ -223,7 +223,7 @@ double NNetwork::train(const arma::mat& X, const arma::mat& y)
 
 }
 //---------------------------------------------------------
-arma::mat NNetwork::_get_display_data(const arma::mat X)
+arma::mat NNetwork::_get_display_data(const arma::mat& X)
 {
     const unsigned m = X.n_rows;
     const unsigned n = X.n_cols;
@@ -250,12 +250,21 @@ arma::mat NNetwork::_get_display_data(const arma::mat X)
                 const double mv = arma::max( arma::abs( X.row(cx) ) );
 
                 const unsigned frow = pad + j * (example_height + pad);
-                const unsigned lrow = frow + example_height;
+                const unsigned lrow = (frow + example_height) - 1;
 
                 const unsigned fcol = pad + i * (example_width + pad);
-                const unsigned lcol = fcol + example_width;
+                const unsigned lcol = (fcol + example_width) - 1;
 
-                res( arma::span(frow, lrow ), arma::span(fcol, lcol ) ) = ( arma::abs( X.row(cx).reshape(example_height, example.width) ) ) / mv;
+
+                arma::mat p1 = X.row(cx);
+                p1.reshape(example_height, example_width);
+
+
+                arma::mat p2 = arma::abs(p1);
+                arma::mat p3 = p2 / mv;
+
+                res( arma::span(frow, lrow ), arma::span(fcol, lcol ) ) = p3;
+
 
                 cx = cx + 1;
         }
@@ -264,6 +273,19 @@ arma::mat NNetwork::_get_display_data(const arma::mat X)
 }
 void NNetwork::visualize()
 {
+        std::vector< arma::mat >::const_iterator ti = _ts.begin();
+        std::vector< arma::mat >::const_iterator te = _ts.end();
+
+        while(ti != te){
+                const arma::mat& theta = *ti; 
+                const arma::mat p1 = theta.cols(1, theta.n_cols - 1);
+                const arma::mat p2 = _get_display_data(p1);
+
+                std::cout << p2;
+
+                ti++;
+        }
+
 }
 //---------------------------------------------------------
 } // namespace mlnn

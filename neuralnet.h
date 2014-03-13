@@ -58,7 +58,7 @@ class NNetwork
         arma::mat _sigmoidGradient(const arma::mat& z);
 
         // generates the display data matrix for X
-        arma::mat NNetwork::_get_display_data(const arma::mat X)
+        arma::mat NNetwork::_get_display_data(const arma::mat& X);
 
     public:
         NNetwork(const NNLayerDesc_t* layerDesc, const unsigned& layerCount);
